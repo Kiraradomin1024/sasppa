@@ -48,8 +48,10 @@ export function getRandomChoices(correctVehicle, count = 4, pool = allVehicles) 
   return choices.sort(() => Math.random() - 0.5);
 }
 
+import resolvedImages from './resolved-images.json';
+
 export function getVehicleImageUrl(vehicle) {
-  return `/api/vehicle-image?name=${encodeURIComponent(vehicle.name)}`;
+  return resolvedImages[vehicle.name] || `https://placehold.co/600x338/0a0a0f/00FF88?text=${encodeURIComponent(vehicle.name)}&font=roboto`;
 }
 
 export function getCategoryIcon(category) {
