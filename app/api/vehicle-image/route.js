@@ -249,8 +249,16 @@ export async function GET(request) {
     return new Response('Missing name', { status: 400 });
   }
 
+  // Cache headers to tell Vercel CDN and browsers to cache the redirect
+  const headers = {
+    'Cache-Control': 'public, max-age=86400, s-maxage=31536000, stale-while-revalidate=86400',
+  };
+
   if (imageCache.has(name)) {
-    return Response.redirect(imageCache.get(name), 302);
+    return new Response(null, {
+      status: 302,
+      headers: { ...headers, 'Location': imageCache.get(name) }
+    });
   }
 
   let imgUrl = await findImage(name);
@@ -260,5 +268,8 @@ export async function GET(request) {
   }
 
   imageCache.set(name, imgUrl);
-  return Response.redirect(imgUrl, 302);
+  return new Response(null, {
+    status: 302,
+    headers: { ...headers, 'Location': imgUrl }
+  });
 }
