@@ -1,11 +1,11 @@
 'use client';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { allVehicles, TIERS, getVehiclesByTier, getCategories, getManufacturers, getCategoryIcon, getCategoryColor, getVehicleImageUrl } from '@/data/vehicles';
 import ImageModal from '@/components/ImageModal';
 import styles from './page.module.css';
 
-export default function CataloguePage() {
+function CatalogueContent() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
   const [selectedCat, setSelectedCat] = useState('all');
@@ -114,5 +114,13 @@ export default function CataloguePage() {
 
       <ImageModal src={zoomedImage} onClose={() => setZoomedImage(null)} />
     </div>
+  );
+}
+
+export default function CataloguePage() {
+  return (
+    <Suspense fallback={<div style={{ padding: '100px', textAlign: 'center', color: '#8a8a9a' }}>Chargement du catalogue...</div>}>
+      <CatalogueContent />
+    </Suspense>
   );
 }
