@@ -1,0 +1,136 @@
+.page { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; }
+.setup { text-align: center; animation: slideUp 0.4s ease; }
+.title { font-size: 2rem; margin-bottom: 8px; }
+.subtitle { color: #8a8a9a; margin-bottom: 40px; }
+
+.optionGroup { margin-bottom: 28px; text-align: left; }
+.label {
+  display: block; margin-bottom: 10px;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600;
+  font-size: 0.85rem; color: #8a8a9a; text-transform: uppercase; letter-spacing: 1px;
+}
+.tierBtns { display: flex; gap: 8px; flex-wrap: wrap; }
+.tierBtn {
+  flex: 1; min-width: 120px; padding: 12px 16px;
+  border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(18,18,30,0.5); color: #8a8a9a;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; font-size: 0.9rem;
+}
+.tierBtn:hover { border-color: rgba(0,255,136,0.2); color: #ccc; }
+.active {
+  background: rgba(0,255,136,0.1) !important;
+  border-color: rgba(0,255,136,0.3) !important;
+  color: #00FF88 !important;
+}
+.startBtn { margin-top: 20px; width: 100%; justify-content: center; font-size: 1.1rem; }
+
+.topBar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; animation: slideUp 0.3s ease;
+}
+.counter { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #8a8a9a; }
+.score { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #00FF88; }
+
+.flashcardWrap {
+  perspective: 1000px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  animation: scaleIn 0.4s ease;
+}
+.flashcard {
+  position: relative;
+  width: 100%; min-height: 350px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flipped { transform: rotateY(180deg); }
+.front, .back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(18,18,30,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+}
+.front {
+  background: linear-gradient(135deg, rgba(18,18,30,0.8), rgba(10,10,20,0.9));
+  border: 1px solid rgba(0,255,136,0.1);
+}
+.back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,212,255,0.03));
+  border: 1px solid rgba(0,255,136,0.2);
+}
+.flashImg {
+  width: 200px; height: 130px; object-fit: cover; border-radius: 12px;
+  margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+}
+.hint {
+  font-family: 'Orbitron', sans-serif; font-size: 1.1rem;
+  color: #ccc; margin-bottom: 16px;
+}
+.tapHint { color: #55556a; font-size: 0.8rem; margin-top: 20px; animation: glowPulse 2s infinite; }
+.catBadge {
+  padding: 4px 14px; border-radius: 100px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.vehicleName {
+  font-family: 'Orbitron', sans-serif; font-size: 2rem;
+  color: #00FF88; margin-bottom: 8px; text-align: center;
+  text-shadow: 0 0 20px rgba(0,255,136,0.3);
+}
+.vehicleMfr {
+  color: #8a8a9a; font-size: 1.1rem; margin-bottom: 16px;
+  font-family: 'Rajdhani', sans-serif; font-weight: 600;
+}
+
+.actions {
+  display: flex; gap: 16px;
+  animation: slideUp 0.4s ease 0.2s both;
+}
+.actionBtn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 16px 24px; font-size: 1rem;
+  border-radius: 12px; border: 1px solid;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  cursor: pointer; transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+.actionBtn:hover { transform: translateY(-2px); }
+.actionBtn:active { transform: translateY(0); }
+.actionFail {
+  background: rgba(255, 23, 68, 0.08);
+  border-color: rgba(255, 23, 68, 0.3);
+  color: #FF1744;
+}
+.actionFail:hover {
+  background: rgba(255, 23, 68, 0.15);
+  box-shadow: 0 0 20px rgba(255, 23, 68, 0.2);
+}
+.actionSuccess {
+  background: rgba(0, 255, 136, 0.08);
+  border-color: rgba(0, 255, 136, 0.3);
+  color: #00FF88;
+}
+.actionSuccess:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+@media (max-width: 768px) {
+  .flashcard { min-height: 280px; }
+  .actions { flex-direction: column; }
+}
+
+/* Force black text on native dropdown options (white background) */
+.page select option {
+  color: #000;
+  background: #fff;
+}
