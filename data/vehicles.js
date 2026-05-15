@@ -54,23 +54,23 @@ export function getVehicleImageUrl(vehicle) {
 
 export function getCategoryIcon(category) {
   const icons = {
-    'Compacts': '🚗', 'Coupes': '🏎️', 'Sedans': '🚙', 'Sports': '⚡',
-    'Super': '💨', 'Muscle': '💪', 'Sports Classics': '🎩', 'SUVs': '🛻',
-    'Off-Road': '🏔️', 'Motorcycles': '🏍️', 'Vans': '🚐', 'Commercial': '🚛',
-    'Helicopters': '🚁', 'Planes': '✈️', 'Boats': '🚤', 'Emergency': '🚨',
-    'Military': '🎖️', 'Utility': '🔧',
+    'Compactes': '🚗', 'Coupés': '🏎️', 'Berlines': '🚙', 'Sportives': '⚡',
+    'Super-sportives': '💨', 'Grosses cylindrées': '💪', 'Sportives classiques': '🎩', 'SUV': '🛻',
+    'Tout-terrain': '🏔️', 'Motos': '🏍️', 'Vans': '🚐', 'Commercial': '🚛',
+    'Hélicoptères': '🚁', 'Avions': '✈️', 'Bateaux': '🚤', 'Secours': '🚨',
+    'Militaire': '🎖️', 'Utilitaires': '🔧',
   };
   return icons[category] || '🚗';
 }
 
 export function getCategoryColor(category) {
   const colors = {
-    'Compacts': '#00FF88', 'Coupes': '#00D4FF', 'Sedans': '#B026FF',
-    'Sports': '#FF6B35', 'Super': '#FF1744', 'Muscle': '#FFD600',
-    'Sports Classics': '#E040FB', 'SUVs': '#00BFA5', 'Off-Road': '#8D6E63',
-    'Motorcycles': '#FF4081', 'Vans': '#78909C', 'Commercial': '#A1887F',
-    'Helicopters': '#40C4FF', 'Planes': '#448AFF', 'Boats': '#26C6DA',
-    'Emergency': '#FF1744', 'Military': '#4CAF50', 'Utility': '#9E9E9E',
+    'Compactes': '#00FF88', 'Coupés': '#00D4FF', 'Berlines': '#B026FF',
+    'Sportives': '#FF6B35', 'Super-sportives': '#FF1744', 'Grosses cylindrées': '#FFD600',
+    'Sportives classiques': '#E040FB', 'SUV': '#00BFA5', 'Tout-terrain': '#8D6E63',
+    'Motos': '#FF4081', 'Vans': '#78909C', 'Commercial': '#A1887F',
+    'Hélicoptères': '#40C4FF', 'Avions': '#448AFF', 'Bateaux': '#26C6DA',
+    'Secours': '#FF1744', 'Militaire': '#4CAF50', 'Utilitaires': '#9E9E9E',
   };
   return colors[category] || '#00FF88';
 }
