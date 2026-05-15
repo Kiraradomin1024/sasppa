@@ -23,7 +23,7 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroBg}></div>
         <div className={styles.heroContent}>
-          <div className={styles.badge}>🚔 Cameron Coleman</div>
+          <div className={styles.badge}>🚔 Cameron M. Coleman</div>
           <h1 className={styles.title}>
             <span className={styles.titleAccent}>SASP</span> Academy
           </h1>
