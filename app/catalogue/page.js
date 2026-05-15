@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { allVehicles, TIERS, getVehiclesByTier, getCategories, getManufacturers, getCategoryIcon, getCategoryColor, getVehicleImageUrl } from '@/data/vehicles';
+import ImageModal from '@/components/ImageModal';
 import styles from './page.module.css';
 
 export default function CataloguePage() {
@@ -10,6 +11,7 @@ export default function CataloguePage() {
   const [selectedCat, setSelectedCat] = useState('all');
   const [selectedTier, setSelectedTier] = useState(4);
   const [selectedMfr, setSelectedMfr] = useState('all');
+  const [zoomedImage, setZoomedImage] = useState(null);
 
   useEffect(() => {
     const cat = searchParams.get('category');
@@ -89,7 +91,7 @@ export default function CataloguePage() {
             <div className={styles.grid}>
               {grouped[cat].map((v, i) => (
                 <div key={v.id} className={styles.card} style={{ '--cat-color': getCategoryColor(v.category), animationDelay: `${i * 0.03}s` }}>
-                  <div className={styles.cardImg}>
+                  <div className={styles.cardImg} onClick={() => setZoomedImage(getVehicleImageUrl(v))} style={{ cursor: 'zoom-in' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={getVehicleImageUrl(v)} alt={v.name} className={styles.cardImage} loading="lazy" />
                   </div>
@@ -109,6 +111,8 @@ export default function CataloguePage() {
           </div>
         )}
       </div>
+
+      <ImageModal src={zoomedImage} onClose={() => setZoomedImage(null)} />
     </div>
   );
 }

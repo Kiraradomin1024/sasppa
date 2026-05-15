@@ -1,6 +1,7 @@
 'use client';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { allVehicles, TIERS, getVehiclesByTier, getCategories, getRandomChoices, getCategoryIcon, getCategoryColor, getVehicleImageUrl } from '@/data/vehicles';
+import ImageModal from '@/components/ImageModal';
 import styles from './page.module.css';
 
 export default function QuizPage() {
@@ -16,6 +17,7 @@ export default function QuizPage() {
   const [timer, setTimer] = useState(0);
   const [mistakes, setMistakes] = useState([]);
   const [finished, setFinished] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState(null);
 
   const categories = getCategories();
   const pool = useMemo(() => {
@@ -168,7 +170,7 @@ export default function QuizPage() {
       </div>
       <div className={styles.questionCard}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={getVehicleImageUrl(q.vehicle)} alt="?" className={styles.qImg} />
+        <img src={getVehicleImageUrl(q.vehicle)} alt="?" className={styles.qImg} onClick={() => setZoomedImage(getVehicleImageUrl(q.vehicle))} style={{ cursor: 'zoom-in' }} />
         <span className={styles.qCat} style={{color:getCategoryColor(q.vehicle.category)}}>{q.vehicle.category}</span>
         <p className={styles.qText}>Quel est le nom de ce véhicule ?</p>
       </div>
@@ -189,6 +191,7 @@ export default function QuizPage() {
           {currentQ < questions.length - 1 ? 'Question suivante →' : 'Voir les résultats 🏁'}
         </button>
       )}
+      <ImageModal src={zoomedImage} onClose={() => setZoomedImage(null)} />
     </div>
   );
 }

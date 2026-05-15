@@ -1,6 +1,7 @@
 'use client';
-import { useState, useMemo, useCallback } from 'react';
-import { allVehicles, TIERS, getVehiclesByTier, getTierCount, getCategories, getCategoryIcon, getCategoryColor, getVehicleImageUrl } from '@/data/vehicles';
+import { useState, useMemo, useCallback, useEffect } from 'react';
+import { allVehicles, TIERS, getVehiclesByTier, getCategoryIcon, getCategoryColor, getVehicleImageUrl, getCategories } from '@/data/vehicles';
+import ImageModal from '@/components/ImageModal';
 import styles from './page.module.css';
 
 export default function FlashcardsPage() {
@@ -13,6 +14,7 @@ export default function FlashcardsPage() {
   });
   const [started, setStarted] = useState(false);
   const [shuffleKey, setShuffleKey] = useState(0);
+  const [zoomedImage, setZoomedImage] = useState(null);
 
   const pool = useMemo(() => {
     let v = getVehiclesByTier(selectedTier);
@@ -92,7 +94,7 @@ export default function FlashcardsPage() {
         <div className={`${styles.flashcard} ${flipped ? styles.flipped : ''}`}>
           <div className={styles.front}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={getVehicleImageUrl(current)} alt="?" className={styles.flashImg} />
+            <img src={getVehicleImageUrl(current)} alt="?" className={styles.flashImg} onClick={(e) => { e.stopPropagation(); setZoomedImage(getVehicleImageUrl(current)); }} style={{ cursor: 'zoom-in' }} />
             <p className={styles.hint}>Quel est ce véhicule ?</p>
             <span className={styles.catBadge} style={{ color: getCategoryColor(current.category) }}>{current.category}</span>
             <p className={styles.tapHint}>Cliquer pour révéler</p>
@@ -113,6 +115,8 @@ export default function FlashcardsPage() {
           Je sais
         </button>
       </div>
+
+      <ImageModal src={zoomedImage} onClose={() => setZoomedImage(null)} />
     </div>
   );
 }
